@@ -1,0 +1,140 @@
+.layout-component {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.layout-container {
+    width: 100vw;
+    max-width: 1440px;
+    background: var(--background);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    overflow-x: hidden;
+    height: 100vh;
+}
+
+.layout-sidebar {
+    min-width: 260px;
+    max-width: 260px;
+    height: 100vh;
+    top: 0;
+    position: sticky;
+    overflow-y: scroll;
+    background: var(--primary-color);
+    color: white;
+}
+
+.layout-sidebar::-webkit-scrollbar {
+    width: 8px; 
+}
+
+.layout-sidebar::-webkit-scrollbar-track {
+    background: var(--primary-color);
+}
+
+.layout-sidebar::-webkit-scrollbar-thumb {
+    background: #b6b2b2; 
+    border-radius: 10px;
+    transition: background 0.3s ease;
+}
+
+.layout-sidebar::-webkit-scrollbar-thumb:hover {
+    background: #9e9e9e; 
+}
+
+
+.layout-body {
+    flex-basis: calc(100% - 260px);
+}
+
+.layout-main {
+    padding: 20px 2% 15px;
+    min-height: calc(100vh - 70px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.layout-topbar {
+    width: 100%;
+    top: 0;
+    position: sticky;
+    z-index: 100;
+}
+
+.layout-footer {
+    padding-top: 2%;
+    text-align: center;
+}
+
+.layout-footer p:nth-child(1) {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.layout-footer p:nth-child(2) {
+    font-style: italic;
+}
+
+.nav-bottom-button {
+    display: none;
+}
+
+
+/*--------------------------- MEDIA QUERYING ---------------------------------*/
+@media screen and (max-width: 1028px) {
+    .layout-container {
+
+            /* highlighting */
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    
+    .layout-sidebar {
+        display: none;
+    }
+
+    .sidebar-extension {
+        display: none;
+    }
+
+    .layout-body {
+        flex-basis: 100%;
+        max-width: 100%;
+    }
+
+    .layout-footer p:nth-child(1) {
+        font-weight: 600;
+        font-size: 17px;
+    }
+
+    .layout-footer p:nth-child(2) {
+        font-style: italic;
+        font-size: 16px;
+    }
+}
+
+
+
+@media screen and (max-width: 770px) {
+    .nav-bottom-button {
+        display: block;
+    }
+} 
+
+
+@media screen and (max-width: 730px) {
+    .layout-topbar {
+        width: 100%;
+        max-width: 100%;
+    }
+} 

@@ -7,7 +7,6 @@ const Dashboard = () => {
     const { theme, toggleTheme } = useTheme();
     const { user } = useAuth();
 
-    console.log(user)
 
   return (
     <header style={{ background: theme.background, color: theme.text }}>

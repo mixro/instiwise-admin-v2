@@ -62,7 +62,7 @@ export default function Login() {
             {/* Logo */}
             <div className="logo">
               <div className="logo-icon">
-                <img src='/src/assets/images/notification-icon.png' />
+                <img src='/src/assets/images/white-icon.png' />
               </div>
               <span className="logo-text">InstiWise</span>
             </div>
