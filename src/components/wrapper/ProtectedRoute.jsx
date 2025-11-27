@@ -1,17 +1,17 @@
-// src/components/ProtectedRoute.jsx
 import { Navigate } from 'react-router-dom';
 import Layout from '../ui/layout/Layout';
+import { useAuth } from '../../hooks/useAuth';
 
-// This component takes the element (the page component) as a prop.
+
 const ProtectedRoute = ({ children }) => {
-  const isAdmin = false;
+  const { isAdmin, isLoading } = useAuth();
+  
+  if (isLoading) return <div>Loading...</div>;
 
   if (!isAdmin) {
-    // If not an admin, redirect them to the login page
     return <Navigate to="/login" replace />;
   }
 
-  // If authenticated, render the children wrapped in the Layout
   return <Layout>{children}</Layout>;
 };
 

@@ -5,10 +5,11 @@ import ProtectedRoute from './components/wrapper/ProtectedRoute';
 import Dashboard from './pages/dashboard/Dashboard';
 import Login from './pages/login/Login';
 import { ThemeProvider } from './context/ThemeContext';
+import { useAuth } from './hooks/useAuth';
 
 
 function App() {
-  const isAdmin = false;
+  const { isAdmin } = useAuth();
 
   return (
     <ThemeProvider>

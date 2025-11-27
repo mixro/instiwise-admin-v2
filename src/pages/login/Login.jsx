@@ -1,34 +1,59 @@
 // src/pages/Login.jsx
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTheme } from '../../context/ThemeContext';
 import { Link, useNavigate } from 'react-router-dom';
-
-// MUI Icons
 import MailOutlineIcon from '@mui/icons-material/MailOutline';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import GoogleIcon from '@mui/icons-material/Google';
-import AppleIcon from '@mui/icons-material/Apple';
+import { useDispatch, useSelector } from 'react-redux';
+import CircularProgress from '@mui/material/CircularProgress';
+import { useGetMeQuery, useLoginMutation } from '../../services/authApi';
+import { useAuth } from '../../hooks/useAuth';
+import { setCredentials } from '../../store/slices/authSlice';
 
-// Install once: npm install @mui/icons-material @mui/material
 
 export default function Login() {
-  const { theme } = useTheme();
-  const navigate = useNavigate();
-  const [showPassword, setShowPassword] = useState(false);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+    const { theme } = useTheme();
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const { isAuthenticated } = useAuth();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add your login API call here
-    navigate('/dashboard');
-  };
+    const [showPassword, setShowPassword] = useState(false);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const [login, { isLoading, error }] = useLoginMutation();
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            navigate('/');
+        }
+    }, [isAuthenticated]);
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        try {
+        const result = await login({ email, password }).unwrap();
+
+        const userPayload = {
+            ...result.data.user,
+            accessToken: result.data.accessToken,
+            refreshToken: result.data.refreshToken,
+        };
+
+        dispatch(setCredentials(userPayload));
+        localStorage.setItem('instiwise-user', JSON.stringify(userPayload));
+
+        navigate('/dashboard');
+        } catch (err) {
+        console.error('Login failed:', err);
+        }
+    };
+
 
   return (
     <>
-      {/* Pure CSS for responsive full-screen layout */}
       <div className="login-container">
 
         <div className="login-card">
@@ -47,52 +72,59 @@ export default function Login() {
               Sign in to access your admin dashboard and continue managing your institute's academic ecosystem.
             </p>
 
-            <form onSubmit={handleSubmit} className="login-form">
-              {/* Email Field */}
-              <div className="input-group">
-                <label>Email</label>
-                <div className="input-wrapper">
-                  <MailOutlineIcon className="input-icon" />
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email"
-                    required
-                  />
+            <form onSubmit={handleLogin} className="login-form">
+                {/* Email Field */}
+                <div className="input-group">
+                    <label>Email</label>
+                    <div className="input-wrapper">
+                    <MailOutlineIcon className="input-icon" />
+                    <input
+                        type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        placeholder="Enter your email"
+                        required
+                    />
+                    </div>
                 </div>
-              </div>
 
-              {/* Password Field */}
-              <div className="input-group">
-                <label>Password</label>
-                <div className="input-wrapper">
-                  <LockOutlinedIcon className="input-icon" />
-                  <input
-                    type={showPassword ? 'text' : 'password'}
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Enter your password"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="toggle-password"
-                  >
-                    {showPassword ? <VisibilityOff /> : <Visibility />}
-                  </button>
+                {/* Password Field */}
+                <div className="input-group">
+                    <label>Password</label>
+                    <div className="input-wrapper">
+                    <LockOutlinedIcon className="input-icon" />
+                    <input
+                        type={showPassword ? 'text' : 'password'}
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter your password"
+                        required
+                    />
+                    <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="toggle-password"
+                    >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                    </button>
+                    </div>
+                    <a href="#" className="forgot-link">Forgot Password?</a>
                 </div>
-                <a href="#" className="forgot-link">Forgot Password?</a>
-              </div>
 
-              {/* Submit Button */}
-              <button type="submit" className="signin-btn">
-                Sign In
-              </button>
-            </form>
+                {/* Submit Button */}
+                <button type="submit" className="signin-btn" disabled={isLoading}>
+                    {isLoading 
+                        ? <CircularProgress sx={{color: "white"}} size={28} />
+                        : <p>Sign In</p>
+                    }
+                </button>
 
-            
+                {error && (
+                    <div className="text-red-500 text-sm mt-2 text-center">
+                    {error?.data?.message || 'Invalid email or password'}
+                    </div>
+                )}
+            </form>            
           </div>
 
           {/* Right: Hero Section (Hidden on Mobile) */}
@@ -132,7 +164,7 @@ export default function Login() {
       </div>
 
       {/* Pure CSS Styles (device-friendly, no build dependency issues) */}
-      <style jsx>{`
+      <style jsx="true">{`
         .login-container {
           min-height: 100vh;
           display: flex;
