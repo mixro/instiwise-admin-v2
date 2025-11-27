@@ -8,7 +8,7 @@ import { ThemeProvider } from './context/ThemeContext';
 
 
 function App() {
-  const isAdmin = true;
+  const isAdmin = false;
 
   return (
     <ThemeProvider>

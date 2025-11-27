@@ -4,7 +4,7 @@ import Layout from '../ui/layout/Layout';
 
 // This component takes the element (the page component) as a prop.
 const ProtectedRoute = ({ children }) => {
-  const isAdmin = true;
+  const isAdmin = false;
 
   if (!isAdmin) {
     // If not an admin, redirect them to the login page
