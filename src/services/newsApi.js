@@ -22,7 +22,7 @@ export const newsApi = createApi({
     }),
 
     getNewsAnalytics: builder.query({
-        query: () => '/news/analytics/timely',
+        query: () => '/news/stats/timely',
         transformResponse: (response) => response.data || {},
         providesTags: ['NewsAnalytics'],
     }),
