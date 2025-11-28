@@ -24,7 +24,7 @@ const Sidebar = () => {
 
   return (
     <div className="sidebar-container">
-      <div className="sidebar-wrapper">
+      <div className="sidebar-wrapper" style={{color: theme.text_sidebar}}>
         <div className="sidebar-top">
           <div className="sidebar-logo">
             <img className='w-15' src='/src/assets/images/white-icon.png' alt='SVC' />

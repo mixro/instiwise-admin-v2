@@ -6,6 +6,8 @@ import Dashboard from './pages/dashboard/Dashboard';
 import Login from './pages/login/Login';
 import { ThemeProvider } from './context/ThemeContext';
 import { useAuth } from './hooks/useAuth';
+import News from './pages/news/News';
+import Events from './pages/events/Events';
 
 
 function App() {
@@ -20,6 +22,8 @@ function App() {
 
             {/* protected pages */}
             <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            <Route path="/news" element={<ProtectedRoute><News /></ProtectedRoute>} />
+            <Route path="/events" element={<ProtectedRoute><Events /></ProtectedRoute>} />
           </Routes>
         </Router>
       </div>

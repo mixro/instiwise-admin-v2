@@ -40,7 +40,7 @@ const Layout = ({children}) => {
 
                     
                     <div className="layout-footer">
-                        <p>© {currentYear}. SVC Float Management</p>
+                        <p>© {currentYear}. INSTiWISE</p>
                     </div>
                 </div>
 

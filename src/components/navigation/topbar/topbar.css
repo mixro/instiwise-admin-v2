@@ -1,0 +1,153 @@
+.topbar-container {
+    width: 100%;
+    padding: 10px 2%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 100;
+}
+
+.topbar-menu-icon {
+    display: none;
+}
+
+.topbar-location p {
+    text-transform: uppercase;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--primary-colors);
+}
+
+
+    /*--------------------- topbar right ---------------------------*/
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+}
+
+.topbar-links {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.topbar-icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+}
+
+.topbar-icon-number {
+    position: absolute;
+    top: -13px;
+    right: -13px;
+    border-radius: 50%;
+    height: 24px;
+    width: 24px;
+    display: flex;
+    padding: 4px;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+}
+
+.topbar-icon-number p {
+    line-height: 0px;
+}
+
+.topbar-profile {
+    width: 55px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    padding: 3px;
+    border: 2px solid var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.topbar-profile img {
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+}
+
+
+
+    /*--------------------------- MEDIA QUERYING ---------------------------------*/
+@media screen and (max-width: 1028px) {
+    .topbar-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-left: 2%;
+        padding: 10px 2%;
+    }
+
+    .topbar-location {
+        display: none;
+    }
+
+    .topbar-menu-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    } 
+
+    .topbar-right {
+        gap: 35px;
+    }
+
+    .topbar-links {
+        gap: 20px;
+    }
+
+    .topbar-icon-number {
+        height: 21px;
+        width: 21px;
+        top: -10px;
+        right: -10px;
+    }
+
+    .topbar-icon-number p {
+        font-size: 15px;
+    }
+
+    .topbar-profile {
+        width: 54px;
+    }
+
+
+    /*------------------- sidebar small ---------------------*/
+    .Small_Sidebar_container {
+        background: var(--primary-color);
+        color: var(--background);
+        height: fit-content;
+        min-height: 100vh;
+        padding: 20px 15px 20px 15px;
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    .small_sidebar_upper {
+        width: 100%;
+    }
+
+    .sidebar_logo {
+        padding-bottom: 20px;
+        border-bottom: 1px solid rgb(167, 167, 167);
+    }
+
+    .sidebar_logo p {
+        font-size: 23px;
+        font-weight: bold;
+    }
+}
