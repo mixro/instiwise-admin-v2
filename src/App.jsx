@@ -9,6 +9,7 @@ import { useAuth } from './hooks/useAuth';
 import News from './pages/news/News';
 import Events from './pages/events/Events';
 import Projects from './pages/projects/Projects';
+import Users from './pages/users/Users';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path="/news" element={<ProtectedRoute><News /></ProtectedRoute>} />
             <Route path="/events" element={<ProtectedRoute><Events /></ProtectedRoute>} />
             <Route path="/projects" element={<ProtectedRoute><Projects /></ProtectedRoute>} />
+            <Route path="/users" element={<ProtectedRoute><Users /></ProtectedRoute>} />
           </Routes>
         </Router>
       </div>
