@@ -21,6 +21,30 @@ export const newsApi = createApi({
           : [{ type: 'News', id: 'LIST' }],
     }),
 
+    getNewsById: builder.query({
+      // Use queryFn + selectFromResult for cache-first behavior
+      queryFn: async (id, api, _extraOptions, baseQuery) => {
+        // Step 1: Try to get from existing cache (getNews)
+        const listResult = api.getState().newsApi.queries['getNews(undefined)'];
+        if (listResult?.data) {
+          const cachedNews = listResult.data.find((n) => n._id === id);
+          if (cachedNews) {
+            return { data: cachedNews };
+          }
+        }
+
+        // Step 2: Not in cache → fetch from server
+        const result = await baseQuery(`/news/${id}`);
+
+        if (result.error) {
+          return { error: result.error };
+        }
+
+        return { data: result.data?.data };
+      },
+      providesTags: (result, error, id) => [{ type: 'News', id }],
+    }),
+
     getNewsAnalytics: builder.query({
         query: () => '/news/stats/timely',
         transformResponse: (response) => response.data || {},
@@ -136,6 +160,7 @@ export const newsApi = createApi({
 // Export hooks
 export const {
   useGetNewsQuery,
+  useGetNewsByIdQuery,
   useGetNewsAnalyticsQuery,
   useCreateNewsMutation,
   useUpdateNewsMutation,
