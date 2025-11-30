@@ -75,8 +75,20 @@ const Projects = () => {
             renderCell: (params) => {
                 return (
                     <div>
-                    <p className='text-center'>{params.row.likes.length || 0}</p>
-                </div>
+                        <p className='text-center'>{params.row.likes.length || 0}</p>
+                    </div>
+                )
+            }
+        },
+        { 
+            field: "collaborators", 
+            headerName: "COLLABORATORS", 
+            width: 100,
+            renderCell: (params) => {
+                return (
+                    <div>
+                        <p className='text-center'>{params.row.collaborators.length || 0}</p>
+                    </div>
                 )
             }
         },

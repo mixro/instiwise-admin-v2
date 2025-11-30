@@ -1,0 +1,39 @@
+.project-bottom {
+    padding: 20px;
+    margin: 20px 0 20px 0;
+    -webkit-box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow);
+    background: white;
+    border-radius: 5px;
+    display: flex;
+    gap: 4%;
+    flex-wrap: wrap;
+}
+
+.projectBottom-item {
+    flex-basis: 48%;
+    margin-bottom: 30px;
+}
+
+.projectBottom-item h3 {
+    font-size: 18px;
+    color: var(--blue-font);
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.projectList p {
+    position: relative;
+    margin-left: 35px;
+}
+
+.projectList p::before {
+    content: '';
+    position: absolute;
+    background: rgb(34, 34, 34); 
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    left: -18px;
+    top: 7px;
+}

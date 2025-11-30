@@ -15,7 +15,7 @@ const Project = () => {
   return (
     <div className="product">
       <div className="productTitleContainer">
-        <h1 className="productTitle">project Details</h1>
+        <h1 className="productTitle">Psroject Details</h1>
         <Link to="/create-project">
           <button className="productAddButton">Create</button>
         </Link>
@@ -71,19 +71,19 @@ const Project = () => {
       <div className="project-bottom">
         <div className="projectBottom-item">
             <h3>Description</h3>
-            <p>{project.desc}</p>
+            <p>{project.description}</p>
         </div>
         <div className="projectBottom-item">
             <h3>Collaborators</h3>
-            {project.collaborators.map((index, item) => (
-                <div className="projectList" key={index}>
+            {project.collaborators.map((item) => (
+                <div className="projectList" key={item}>
                     <p>{item}</p>
                 </div>
             ))}
         </div>
         <div className="projectBottom-item">
             <h3>Goals</h3>
-            {project.goals.map((index, item) => (
+            {project.goals.map((item, index) => (
                 <div className="projectList" key={index}>
                     <p>{item}</p>
                 </div>
@@ -91,7 +91,7 @@ const Project = () => {
         </div>
         <div className="projectBottom-item">
             <h3>Resources</h3>
-            {project.resources.map((index, item) => (
+            {project.resources.map((item, index) => (
                 <div className="projectList" key={index}>
                     <p>{item}</p>
                 </div>
@@ -99,7 +99,7 @@ const Project = () => {
         </div>
         <div className="projectBottom-item">
             <h3>Budget</h3>
-            {project.budget.map((index, item) => (
+            {project.budget.map((item, index) => (
                 <div className="projectList" key={index}>
                     <p>{item}</p>
                 </div>
@@ -107,7 +107,7 @@ const Project = () => {
         </div>
         <div className="projectBottom-item">
             <h3>Scope</h3>
-            {project.scope.map((index, item) => (
+            {project.scope.map((item, index) => (
                 <div className="projectList" key={index}>
                     <p>{item}</p>
                 </div>
@@ -115,7 +115,7 @@ const Project = () => {
         </div>
         <div className="projectBottom-item">
             <h3>Plan</h3>
-            {project.plan.map((index, item) => (
+            {project.plan.map((item, index) => (
                 <div className="projectList" key={index}>
                     <p>{item}</p>
                 </div>
@@ -123,7 +123,7 @@ const Project = () => {
         </div>
         <div className="projectBottom-item">
             <h3>Challenges</h3>
-            {project.plan.map((index, item) => (
+            {project.plan.map((item, index) => (
                 <div className="projectList" key={index}>
                     <p>{item}</p>
                 </div>

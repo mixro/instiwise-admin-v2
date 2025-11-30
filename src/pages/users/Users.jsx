@@ -78,7 +78,7 @@ const Users = () => {
             renderCell: (params) => {
                 return (
                     <div className="newsButtons">
-                        <Link to={"/news/" + params.row._id}>
+                        <Link to={"/users/" + params.row._id}>
                             <button className='viewButton'>view</button>
                         </Link>
                     </div>

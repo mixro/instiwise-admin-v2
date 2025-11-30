@@ -3,7 +3,7 @@ import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from './authApi';
 
 export const usersApi = createApi({
-  reducerPath: 'userApi',
+  reducerPath: 'usersApi',
   baseQuery: baseQueryWithReauth,
   tagTypes: ['Users', 'User', 'UserAnalytics'],
 
@@ -26,8 +26,25 @@ export const usersApi = createApi({
 
     // PUBLIC/ADMIN: Get user by ID (self or admin)
     getUserById: builder.query({
-      query: (id) => `/users/${id}`,
-      transformResponse: (res) => res.data,
+      queryFn: async (id, api, _extraOptions, baseQuery) => {
+        // Step 1: Try to get from existing cache (getNews)
+        const listResult = api.getState().usersApi.queries['getAllUsers(undefined)'];
+        if (listResult?.data) {
+          const cachedUsers = listResult.data.find((n) => n._id === id);
+          if (cachedUsers) {
+            return { data: cachedUsers };
+          }
+        }
+
+        // Step 2: Not in cache → fetch from server
+        const result = await baseQuery(`/users/${id}`);
+
+        if (result.error) {
+          return { error: result.error };
+        }
+
+        return { data: result.data?.data };
+      },
       providesTags: (result, error, id) => [{ type: 'User', id }],
     }),
 

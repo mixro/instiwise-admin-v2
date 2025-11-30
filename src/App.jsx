@@ -13,6 +13,7 @@ import Users from './pages/users/Users';
 import NewsDetails from './pages/newsDetails/NewsDetails';
 import Event from './pages/event/Event';
 import Project from './pages/project/Project';
+import User from './pages/user/User';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
             <Route path="/projects" element={<ProtectedRoute><Projects /></ProtectedRoute>} />
             <Route path="/projects/:id" element={<ProtectedRoute><Project /></ProtectedRoute>} />
             <Route path="/users" element={<ProtectedRoute><Users /></ProtectedRoute>} />
+            <Route path="/users/:id" element={<ProtectedRoute><User /></ProtectedRoute>} />
           </Routes>
         </Router>
       </div>

@@ -2,6 +2,7 @@
 :root {
   --background: #ECEEF2;
   --secondary-background: #FDFFFF;
+  --whiter-color: #fff;
   --primary-color: #2A3037;
   --third-color: #2a3037de;
   --secondary-color: #018559;
@@ -11,6 +12,7 @@
   --dark-green: green;
   --badge-color: #026aaf;
   --blue-font: #0134a1;
+  --font-blue: #0134a1;
   --blue-color: blue;
   --softer-black: #2e2e2e;
   --softer-gray: #474747;
