@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './projects.css'
 import { useTheme } from '../../context/ThemeContext';
-import { useGetAllProjectsQuery, useGetProjectQuery, useGetProjectTimelyAnalyticsQuery } from '../../services/projectsApi';
+import { useGetAllProjectsQuery, useGetProjectTimelyAnalyticsQuery } from '../../services/projectsApi';
 import { DataGrid } from '@mui/x-data-grid';
 import { CalendarMonth, FileDownload, Search, Work } from '@mui/icons-material';
 import CountUp from 'react-countup';
@@ -96,7 +96,7 @@ const Projects = () => {
             renderCell: (params) => {
                 return (
                     <div className="newsButtons">
-                        <Link to={"/news/" + params.row._id}>
+                        <Link to={"/projects/" + params.row._id}>
                             <button className='viewButton'>view</button>
                         </Link>
                     </div>

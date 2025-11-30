@@ -22,9 +22,26 @@ export const projectsApi = createApi({
     }),
 
     // GET: Single project by ID
-    getProject: builder.query({
-      query: (id) => `/projects/${id}`,
-      transformResponse: (res) => res.data,
+    getProjectById: builder.query({
+      queryFn: async (id, api, _extraOptions, baseQuery) => {
+          // Step 1: Try to get from existing cache (getNews)
+          const listResult = api.getState().projectsApi.queries['getAllProjects(undefined)'];
+          if (listResult?.data) {
+            const cachedProjects = listResult.data.find((n) => n._id === id);
+            if (cachedProjects) {
+              return { data: cachedProjects };
+            }
+          }
+  
+          // Step 2: Not in cache → fetch from server
+          const result = await baseQuery(`/projects/${id}`);
+  
+          if (result.error) {
+            return { error: result.error };
+          }
+  
+          return { data: result.data?.data };
+      },
       providesTags: (result, error, id) => [{ type: 'Project', id }],
     }),
 
@@ -127,7 +144,7 @@ export const projectsApi = createApi({
 // Export all hooks
 export const {
   useGetAllProjectsQuery,
-  useGetProjectQuery,
+  useGetProjectByIdQuery,
   useGetUserProjectsQuery,
   useGetProjectTimelyAnalyticsQuery,
 
