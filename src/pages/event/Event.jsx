@@ -1,19 +1,19 @@
 import { Link, useLocation } from 'react-router-dom';
-import './newsDetails.css'
-import moment from 'moment';
-import { useGetNewsByIdQuery } from '../../services/newsApi';
+import './event.css'
 import { useState } from 'react';
+import { useGetEventByIdQuery } from '../../services/eventsApi';
+import moment from 'moment';
 import { Photo } from '@mui/icons-material';
 import { CircularProgress } from '@mui/material';
 
-const NewsDetails = () => {
+const Event = () => {
     const location = useLocation();
-    const newsId = location.pathname.split("/")[2];
+    const eventId = location.pathname.split("/")[2];
     const [inputs, setInputs] =  useState({});
     const [imagePreview, setImagePreview] = useState(null);
     const [isUploading, setIsUploading] = useState(false);
-    
-    const { data: news, isLoading, isFetching, error, } = useGetNewsByIdQuery(newsId);
+
+    const { data: event, isLoading, isFetching, error, } = useGetEventByIdQuery(eventId);
 
     const handleChange = (e) => {
         setInputs((prev) => {
@@ -39,14 +39,15 @@ const NewsDetails = () => {
 
     }
     
-    if (isLoading) return <div>Loading news...</div>;
-    if (error) return <div>Error Loading news...</div>;
-
+    if (isLoading) return <div>Loading events...</div>;
+    if (error) return <div>Error Loading events...</div>;
+    
+    
   return (
     <div className="product">
       <div className="productTitleContainer">
-        <h1 className="productTitle">News Details</h1>
-        <Link to="/create-news">
+        <h1 className="productTitle">Events Details</h1>
+        <Link to="/create-events">
           <button className="productAddButton">Create</button>
         </Link>
       </div>
@@ -54,40 +55,52 @@ const NewsDetails = () => {
       <div className="productTop">
           <div className="productTopLeft">
             <div className="roomImage">
-              <img src={news?.img} alt="PR" />
+              <img src="https://i.pinimg.com/originals/4c/98/5f/4c985ff32df376a36599eaa38a1f0597.jpg" alt="PR" />
             </div>
           </div>
           <div className="productTopRight">
               <div className="productInfoTop">
-                  <span className="productName">{news.header}</span>
+                  <span className="productName">{event.header}</span>
               </div>
               <div className="productInfoBottom">
                   <div className="productInfoItem">
                       <span className="productInfoKey">Id:</span>
-                      <span className="productInfoValue">{news._id}</span>
+                      <span className="productInfoValue">{event._id}</span>
                   </div>
                   <div className="productInfoItem">
-                      <span className="productInfoKey">Views:</span>
-                      <span className="productInfoValue">{news.likes.length}</span>
+                      <span className="productInfoKey">Location:</span>
+                      <span className="productInfoValue">{event.location}</span>
                   </div>
                   <div className="productInfoItem">
-                      <span className="productInfoKey">Likes:</span>
-                      <span className="productInfoValue">{news.likes.length}</span>
+                      <span className="productInfoKey">Category:</span>
+                      <span className="productInfoValue">{event.category}</span>
                   </div>
                   <div className="productInfoItem">
-                      <span className="productInfoKey">Dislikes:</span>
-                      <span className="productInfoValue">{news.dislikes.length}</span>
+                      <span className="productInfoKey">Date:</span>
+                      <span className="productInfoValue">{event.date}</span>
+                  </div>
+                  <div className="productInfoItem">
+                      <span className="productInfoKey">Starts:</span>
+                      <span className="productInfoValue">{event.start}</span>
+                  </div>
+                  <div className="productInfoItem">
+                      <span className="productInfoKey">Ends:</span>
+                      <span className="productInfoValue">{event.end}</span>
+                  </div>
+                  <div className="productInfoItem">
+                      <span className="productInfoKey">Favorites:</span>
+                      <span className="productInfoValue">{event.favorites.length}</span>
                   </div>
                   <div className="productInfoItem">
                       <span className="productInfoKey">Created:</span>
-                      <span className="productInfoValue">{moment(news.createdAt).fromNow()}</span>
+                      <span className="productInfoValue">{moment(event.createdAt).fromNow()}</span>
                   </div>
                   <div className="productInfoItem">
                       <span className="productInfoKey">Updated:</span>
-                      <span className="productInfoValue">{moment(news.updatedAt).fromNow()}</span>
+                      <span className="productInfoValue">{moment(event.updatedAt).fromNow()}</span>
                   </div>
                   <div className="productInfoItemm">
-                      <p>{news.desc}</p>
+                      <p>{event.desc}</p>
                   </div>
               </div>
           </div>
@@ -107,7 +120,7 @@ const NewsDetails = () => {
                             <input 
                                 name='header'
                                 type="text" 
-                                placeholder={news.header}
+                                placeholder={event.header}
                                 onChange={handleChange}
                             />
                         </div>
@@ -125,7 +138,7 @@ const NewsDetails = () => {
                             <input
                                 name="category"
                                 type="text"
-                                placeholder="Automation"
+                                placeholder={event.category}
                                 onChange={handleChange}
                             />
                         </div>
@@ -133,29 +146,29 @@ const NewsDetails = () => {
 
                     <div className="productFormLeft-item">
                         <div className="updateProductItem">
-                            <label>Price</label>
+                            <label>Date</label>
                             <input
                                 name="price"
                                 type="number"
-                                placeholder="3493444"
+                                placeholder={event.date}
                                 onChange={handleChange}
                             />
                         </div>
                         <div className="updateProductItem">
-                            <label>Technicians</label>
+                            <label>Starts</label>
                             <input
                                 name="technicians"
                                 type="number"
-                                placeholder="15"
+                                placeholder={event.start}
                                 onChange={handleChange}
                             />
                         </div>
                         <div className="updateProductItem">
-                            <label>Duration</label>
+                            <label>Ends</label>
                             <input
                                 name="duration"
                                 type="text"
-                                placeholder="2-3 Weeks"
+                                placeholder={event.end}
                                 onChange={handleChange}
                             />
                         </div>                      
@@ -180,7 +193,7 @@ const NewsDetails = () => {
                     />
 
                     <div className="upload_Img">
-                    <img src={imagePreview || news.img} alt="Preview" />   
+                    <img src={imagePreview || "https://i.pinimg.com/originals/4c/98/5f/4c985ff32df376a36599eaa38a1f0597.jpg"} alt="Preview" />   
 
                     {isUploading && <div className="upload_indication">
                         <CircularProgress sx={{color: "white"}} size={70} />
@@ -213,4 +226,4 @@ const NewsDetails = () => {
   )
 }
 
-export default NewsDetails
+export default Event

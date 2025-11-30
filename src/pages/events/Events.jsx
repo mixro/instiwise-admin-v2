@@ -86,7 +86,7 @@ const Events = () => {
             renderCell: (params) => {
                 return (
                     <div className="newsButtons">
-                        <Link to={"/news/" + params.row._id}>
+                        <Link to={"/events/" + params.row._id}>
                             <button className='viewButton'>view</button>
                         </Link>
                     </div>

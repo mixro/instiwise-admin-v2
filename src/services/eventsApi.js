@@ -23,8 +23,26 @@ export const eventsApi = createApi({
 
     // GET: Single event by ID
     getEventById: builder.query({
-      query: (id) => `/events/${id}/event`,
-      transformResponse: (response) => response.data,
+      queryFn: async (id, api, _extraOptions, baseQuery) => {
+          // Step 1: Try to get from existing cache (getNews)
+          const listResult = api.getState().eventsApi.queries['getEvents(undefined)'];
+          if (listResult?.data) {
+            const cachedEvents = listResult.data.find((n) => n._id === id);
+            if (cachedEvents) {
+              return { data: cachedEvents };
+            }
+          }
+
+  
+          // Step 2: Not in cache → fetch from server
+          const result = await baseQuery(`/events/${id}/event`);
+  
+          if (result.error) {
+            return { error: result.error };
+          }
+  
+          return { data: result.data?.data };
+      },
       providesTags: (result, error, id) => [{ type: 'Event', id }],
     }),
 

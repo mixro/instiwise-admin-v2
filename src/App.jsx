@@ -11,6 +11,7 @@ import Events from './pages/events/Events';
 import Projects from './pages/projects/Projects';
 import Users from './pages/users/Users';
 import NewsDetails from './pages/newsDetails/NewsDetails';
+import Event from './pages/event/Event';
 
 
 function App() {
@@ -28,6 +29,7 @@ function App() {
             <Route path="/news" element={<ProtectedRoute><News /></ProtectedRoute>} />
             <Route path="/news/:id" element={<ProtectedRoute><NewsDetails /></ProtectedRoute>} />
             <Route path="/events" element={<ProtectedRoute><Events /></ProtectedRoute>} />
+            <Route path="/events/:id" element={<ProtectedRoute><Event /></ProtectedRoute>} />
             <Route path="/projects" element={<ProtectedRoute><Projects /></ProtectedRoute>} />
             <Route path="/users" element={<ProtectedRoute><Users /></ProtectedRoute>} />
           </Routes>

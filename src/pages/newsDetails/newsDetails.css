@@ -30,6 +30,7 @@
   
 .productTopLeft {
   flex: 1;
+  height: fit-content;
 }
 
 .productTopRight {
