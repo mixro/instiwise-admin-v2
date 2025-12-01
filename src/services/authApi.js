@@ -63,6 +63,15 @@ export const authApi = createApi({
   baseQuery: baseQueryWithReauth,
   tagTypes: ['User'],
   endpoints: (builder) => ({
+    register: builder.mutation({
+      query: (credentials) => ({
+        url: '/auth/register',
+        method: 'POST',
+        body: credentials,
+      }),
+      invalidatesTags: ['User'],
+    }),
+
     login: builder.mutation({
       query: (credentials) => ({
         url: '/auth/admin/login',
@@ -87,4 +96,9 @@ export const authApi = createApi({
 });
 
 export { baseQueryWithReauth }
-export const { useLoginMutation, useGetMeQuery, useLogoutMutation } = authApi;
+export const { 
+  useRegisterMutation,
+  useLoginMutation, 
+  useGetMeQuery, 
+  useLogoutMutation 
+} = authApi;

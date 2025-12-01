@@ -65,25 +65,19 @@ const Sidebar = () => {
           </div>
 
           <div className="sidebar-links">
-            <Link to='/news' className='link-main'>
+            <Link to='/create-news' className='link-main'>
               <div className="sidebar-link">
                 <Feed sx={{fontSize: 28}} />
                 <p>Create News</p>
               </div>
             </Link>
-            <Link to='/events' className='link-main'>
+            <Link to='/create-event' className='link-main'>
               <div className="sidebar-link">
                 <CalendarMonth sx={{fontSize: 28}} />
                 <p>New Event</p>
               </div>
             </Link>
-            <Link to='/projects' className='link-main'>
-              <div className="sidebar-link">
-                <Work sx={{fontSize: 28}} />
-                <p>New Project</p>
-              </div>
-            </Link>
-            <Link to='/users' className='link-main'>
+            <Link to='/create-user' className='link-main'>
               <div className="sidebar-link">
                 <PeopleAlt sx={{fontSize: 28}} />
                 <p>New User</p>

@@ -14,6 +14,8 @@ import NewsDetails from './pages/newsDetails/NewsDetails';
 import Event from './pages/event/Event';
 import Project from './pages/project/Project';
 import User from './pages/user/User';
+import NewUser from './pages/newUser/NewUser';
+import NewEvent from './pages/newEvent/NewEvent';
 
 
 function App() {
@@ -28,14 +30,20 @@ function App() {
 
             {/* protected pages */}
             <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+            
             <Route path="/news" element={<ProtectedRoute><News /></ProtectedRoute>} />
             <Route path="/news/:id" element={<ProtectedRoute><NewsDetails /></ProtectedRoute>} />
+
             <Route path="/events" element={<ProtectedRoute><Events /></ProtectedRoute>} />
             <Route path="/events/:id" element={<ProtectedRoute><Event /></ProtectedRoute>} />
+            <Route path="/create-event" element={<ProtectedRoute><NewEvent /></ProtectedRoute>} />
+
             <Route path="/projects" element={<ProtectedRoute><Projects /></ProtectedRoute>} />
             <Route path="/projects/:id" element={<ProtectedRoute><Project /></ProtectedRoute>} />
+            
             <Route path="/users" element={<ProtectedRoute><Users /></ProtectedRoute>} />
             <Route path="/users/:id" element={<ProtectedRoute><User /></ProtectedRoute>} />
+            <Route path="/create-user" element={<ProtectedRoute><NewUser /></ProtectedRoute>} />
           </Routes>
         </Router>
       </div>

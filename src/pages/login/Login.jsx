@@ -47,7 +47,7 @@ export default function Login() {
 
         navigate('/dashboard');
         } catch (err) {
-        console.error('Login failed:', err);
+          console.error('Login failed:', err);
         }
     };
 
