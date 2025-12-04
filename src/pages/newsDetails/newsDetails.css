@@ -114,7 +114,7 @@
     white-space: nowrap;
   }
   
-  .productInfoItem_colors {
+.productInfoItem_colors {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -146,7 +146,7 @@
 .productFormLeft {
   display: flex;
   flex-direction: column;
-  flex-basis: 65%;
+  flex-basis: 70%;
 }
 
 .productFormLeft-title p {
@@ -221,8 +221,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-top: 30px;
-  flex-basis: 30%;
+  flex-basis: 28%;
 }
 
 .productUpload{
@@ -247,6 +246,9 @@
 
 .productsUpload-button {
   padding-top: 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .upload_Button {
@@ -263,10 +265,8 @@
 }
 
 .upload_Img {
-  width: 55%;
+  width: 100%;
   aspect-ratio: 1/1;
-  max-height: 162px;
-  max-width: 162px;
   background: var(--whiter-color);
   margin-top: 15px;
   border-radius: 5px;
@@ -315,7 +315,7 @@
 }
 
 .productButton-container {
-    flex-basis: 31%;
+    flex-basis: 34%;
 }
 
 .update-button {
