@@ -16,6 +16,7 @@ import Project from './pages/project/Project';
 import User from './pages/user/User';
 import NewUser from './pages/newUser/NewUser';
 import NewEvent from './pages/newEvent/NewEvent';
+import CreateNews from './pages/createNews/CreateNews';
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
             
             <Route path="/news" element={<ProtectedRoute><News /></ProtectedRoute>} />
             <Route path="/news/:id" element={<ProtectedRoute><NewsDetails /></ProtectedRoute>} />
+            <Route path="/create-news" element={<ProtectedRoute><CreateNews /></ProtectedRoute>} />
 
             <Route path="/events" element={<ProtectedRoute><Events /></ProtectedRoute>} />
             <Route path="/events/:id" element={<ProtectedRoute><Event /></ProtectedRoute>} />
