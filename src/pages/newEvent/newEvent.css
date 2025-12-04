@@ -29,11 +29,11 @@
   color: var(--blue-font);
 }
   
-.addProductItem > input {
+.event_input {
   padding: 10px;
   width: 100%;
   border-radius: 5px;
-  border: 1px solid gray;
+  border: 2px solid gray;
   outline: none;
   background: white;
 }
@@ -80,10 +80,11 @@
 
 .addProduct_Image {
   flex-basis: 20%;
+
 }
 
 .addProduct_upload {
-  padding: 34px 0 10px;
+  padding: 0 10px 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
