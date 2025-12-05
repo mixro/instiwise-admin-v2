@@ -7,9 +7,11 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { Photo } from '@mui/icons-material';
+import { useAuth } from '../../hooks/useAuth';
 
 
 const NewEvent = () => {
+    const { user } = useAuth();
     const [showSuccess, setShowSuccess] = useState(false);
     const [createEvent, { isLoading: submitting, error }] = useCreateEventMutation();
     
@@ -44,6 +46,7 @@ const NewEvent = () => {
       }
 
       const payload = {
+        userId: user._id,
         header: formData.header,
         location: formData.location,
         category: formData.category,

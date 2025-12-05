@@ -95,7 +95,6 @@ export const eventsApi = createApi({
         method: 'DELETE',
       }),
       invalidatesTags: (result, error, id) => [
-        { type: 'Event', id },
         { type: 'Events', id: 'LIST' },
         'UpcomingEvents',
         'EventsAnalytics'

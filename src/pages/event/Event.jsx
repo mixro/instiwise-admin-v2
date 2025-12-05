@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import './event.css'
 import { useEffect, useState } from 'react';
 import { useDeleteEventMutation, useGetEventByIdQuery, useUpdateEventMutation } from '../../services/eventsApi';
@@ -16,6 +16,9 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 const Event = () => {
     const location = useLocation();
     const eventId = location.pathname.split("/")[2];
+    const navigate = useNavigate();
+    const [success, setSuccess] = useState(false);
+    const [deleteConfirm, setDeleteConfirm] = useState(false);
     
     const { data: event, isLoading, error } = useGetEventByIdQuery(eventId);
     const [updateEvent, { isLoading: updating }] = useUpdateEventMutation();
@@ -31,20 +34,18 @@ const Event = () => {
         endTime: null,
     });
     
-    const [success, setSuccess] = useState(false);
-    const [deleteConfirm, setDeleteConfirm] = useState(false);
 
     // Populate form when event loads
     useEffect(() => {
         if (event) {
             setFormData({
-            header: event.header || '',
-            location: event.location || '',
-            category: event.category || '',
-            desc: event.desc || '',
-            date: event.date ? dayjs(event.date, 'DD/MM/YYYY') : null,
-            startTime: event.start ? dayjs(event.start, 'hh:mm A') : null,
-            endTime: event.end ? dayjs(event.end, 'hh:mm A') : null,
+                header: event.header || '',
+                location: event.location || '',
+                category: event.category || '',
+                desc: event.desc || '',
+                date: event.date ? dayjs(event.date, 'DD/MM/YYYY') : null,
+                startTime: event.start ? dayjs(event.start, 'hh:mm A') : null,
+                endTime: event.end ? dayjs(event.end, 'hh:mm A') : null,
             });
         }
     }, [event]);
@@ -77,22 +78,24 @@ const Event = () => {
     };
 
     const handleDelete = async () => {
-        if (!deleteConfirm) {
+        if (!deleteConfirm) {            
             setDeleteConfirm(true);
             setTimeout(() => setDeleteConfirm(false), 5000); // Auto-hide after 5s
-           return;
+            return;
         }
 
         try {
             await deleteEvent(eventId).unwrap();
-            navigate('/events'); // Redirect after delete
+
+            navigate('/events', { replace: true });
         } catch (err) {
             console.error('Delete failed:', err);
+            setDeleteConfirm(false);
         }
     };
     
-    if (isLoading) return <div>Loading events...</div>;
-    if (error) return <div>Error Loading events...</div>;
+    if (isLoading) return <div>Loading event with event id: {eventId}...</div>;
+    if (error) return <div>Error Loading event with event id: {eventId}...</div>;
     
     
   return (
