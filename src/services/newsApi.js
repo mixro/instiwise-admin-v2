@@ -78,7 +78,6 @@ export const newsApi = createApi({
         method: 'DELETE',
       }),
       invalidatesTags: (result, error, id) => [
-        { type: 'News', id },
         { type: 'News', id: 'LIST' },
         'NewsAnalytics'
       ],

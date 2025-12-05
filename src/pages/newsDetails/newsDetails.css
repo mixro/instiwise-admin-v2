@@ -142,12 +142,28 @@
     display: flex;
     justify-content: space-between;
 }
-  
+
+.formGrid {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
 .productFormLeft {
   display: flex;
   flex-direction: column;
   flex-basis: 70%;
 }
+
+.formGrid_left {
+  flex-basis: 70%;
+}
+
+.newDetails_Image {
+  flex-basis: 28%;
+  height: 100%;
+}
+
 
 .productFormLeft-title p {
   font-size: 22px;
@@ -395,6 +411,17 @@
       display: flex;
       justify-content: space-between;
       flex-direction: column;
+    }
+
+    .formGrid {
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .formGrid_left {
+      flex-basis: 100%;
     }
   
     .productFormLeft-container {
