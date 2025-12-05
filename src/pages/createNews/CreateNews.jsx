@@ -1,160 +1,211 @@
-import './createNews.css'
+// src/pages/CreateNews.jsx
 import { useState } from 'react';
-import { Photo } from '@mui/icons-material';
-import { CircularProgress } from '@mui/material';
+import { CircularProgress, Alert, TextField, Button } from '@mui/material';
+import { PhotoCamera } from '@mui/icons-material';
+import './CreateNews.css';
 import { useCreateNewsMutation } from '../../services/newsApi';
+import { useImageUpload } from '../../hooks/useImageUpload';
 
 const CreateNews = () => {
-  const [inputs, setInputs] =  useState({});
-  const [file, setFile] = useState(null);
-  const [imagePreview, setImagePreview] = useState(null);
-  const [isUploading, setIsUploading] = useState(false);
-  const [addButtonClicked, setAddButtonClicked] = useState(false);
-  const [cat, setCat] = useState([]);
+  const [createNews, { isLoading: submitting, error: serverError }] = useCreateNewsMutation();
+  const { pickImage, uploadImage, uploading: isUploading, progress } = useImageUpload();
 
-  const [createNews, { isLoading: submitting }] = useCreateNewsMutation();
-  
+  const [formData, setFormData] = useState({
+    header: '',
+    category: '',
+    desc: '',
+  });
 
-  const handleImageChange = (e) => {  
-    const selectedFile = e.target.files[0];
-    setFile(selectedFile);
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
+  const [success, setSuccess] = useState(false);
 
-    if (selectedFile) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result); // Set the preview URL
-      };
-      reader.readAsDataURL(selectedFile); // Convert file to base64 URL
+  const handlePickImage = async () => {
+    const file = await pickImage();
+    if (file) {
+      setSelectedFile(file);
+      setPreviewUrl(URL.createObjectURL(file));
     }
   };
 
-  const handleChange = (e) => {
-    setInputs((prev) => {
-      return { ...prev,  [e.target.name]: e.target.value };
-    });
-  };
-
-  const handleCat = (e) => {
-    setCat(e.target.value.split(","));
-  };
-
-  const handleClick = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setAddButtonClicked(true);
-  } 
+
+    if (!formData.header || !formData.category || !formData.desc) {
+      alert('Please fill in Title, Category, and Description');
+      return;
+    }
+
+    let imageUrl = null;
+
+    // Only upload image if one was selected
+    if (selectedFile) {
+      const uploadResult = await uploadImage(selectedFile);
+      if (!uploadResult?.url) {
+        alert('Image upload failed. You can still publish without an image.');
+        // Continue without image
+      } else {
+        imageUrl = uploadResult.url;
+      }
+    }
+
+    // Final payload — img is optional
+    const payload = {
+      header: formData.header.trim(),
+      category: formData.category.trim(),
+      desc: formData.desc.trim(),
+      ...(imageUrl && { img: imageUrl }), // Only include img if exists
+    };
+
+    try {
+      await createNews(payload).unwrap();
+      setSuccess(true);
+      setTimeout(() => setSuccess(false), 4000);
+
+      // Reset form completely
+      setFormData({ header: '', category: '', desc: '' });
+      setSelectedFile(null);
+      setPreviewUrl(null);
+    } catch (err) {
+      console.error('Failed to publish news:', err);
+    }
+  };
+
   return (
     <div className="newProduct">
-            <h1 className="addProductTitle">NEWS</h1>
-            <form className="addProductForm">
-              <div className="addProduct_container">
-                <div className="addProduct_left">
-                  <div className="addProductItem">
-                    <label>Title</label>
-                    <input 
-                      name='title'
-                      type="text" 
-                      placeholder="Eg; Circuit Breaker" 
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="addProductItem">
-                    <label>Price</label>
-                    <input
-                      name="price"
-                      type="number"
-                      placeholder="Eg; 349045"
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="addProductItem">
-                    <label>Brand</label>
-                    <input
-                      name="brand"
-                      type="text"
-                      placeholder="Eg; Siemens"
-                      onChange={handleChange}
-                    />
-                  </div>
-                  <div className="addProductItem">
-                    <label>Category</label>
-                    <input
-                      name="type"
-                      type="text"
-                      placeholder="Eg; Power protection"
-                      onChange={handleChange}
-                    />
-                  </div>
-                </div>
-      
-                <div className="addProduct_left">
-                    <div className="addProductItem">
-                        <label>Field</label>
-                        <input
-                          name="categories"
-                          type="text"
-                          placeholder="Eg; Electrical "
-                          onChange={handleCat}
-                        />
-                    </div>
-                    <div className="addProductItem">
-                        <label>Status</label>
-                        <select name="status" id="active" onChange={handleChange}>
-                          <option value="true">On stock</option>
-                          <option value="false">Off stock</option>
-                        </select>
-                    </div>
-                    <div className="addProductItem">
-                        <label>Description</label>
-                        <textarea 
-                          defaultValue="Add Product description" 
-                          name='desc'
-                          onChange={handleChange} 
-                        >
-                        </textarea>
-                    </div>
-                </div>
-    
-                <div className="addProduct_Image">
-                    <div className="addProduct_upload">
-                      <label htmlFor='file'>
-                        <div className="upload_Button" style={{cursor: isUploading ? "not-allowed" : "pointer"}}>
-                          <Photo />
-                          <p>CHOOSE IMAGE</p>
-                        </div>
-                      </label>
-                      
-                      <input 
-                        type="file" 
-                        id="file" 
-                        accept="image/*"
-                        style={{display:"none"}}
-                        onChange={handleImageChange}
-                      />
-    
-                      <div className="addProduct_ImgUpload">
-                        <img src={imagePreview} alt="Preview" />   
-    
-                        {isUploading && <div className="upload_indication">
-                          <CircularProgress sx={{color: "white"}} size={70} />
-                          <p>Uploading..</p>
-                        </div>}                   
-                      </div>
-                    </div>
-                </div>
-              </div>
-      
-              <div className="createProductButton">
-                <div className="productButton-container">
-                  <div onClick={handleClick} className='update-button' style={{cursor: isUploading ? "not-allowed" : "pointer"}}>
-                    {addButtonClicked && isFetching && !error ? <CircularProgress sx={{color: "white"}} size={30} /> : <p>CREATE</p>}
-                  </div>
-    
-                  {addButtonClicked && error && <p style={{color: "red"}}>error occurred</p>} 
-                </div>
-              </div>      
-            </form>
-        </div>
-  )
-}
+      <h1 className="addProductTitle">CREATE NEWS</h1>
 
-export default CreateNews
+      {success && (
+        <Alert severity="success" sx={{ mb: 3 }}>
+          News published successfully!
+        </Alert>
+      )}
+
+      {serverError && (
+        <Alert severity="error" sx={{ mb: 3 }}>
+          Failed to publish: {serverError?.data?.message || 'Try again'}
+        </Alert>
+      )}
+
+      <form onSubmit={handleSubmit} className="addProductForm">
+        <div className="addProduct_container createNew_container">
+          {/* Form Fields */}
+          <div className="addProduct_left createNews_inputs">
+            <TextField
+              className='event_input'
+              label="News Title"
+              fullWidth
+              required
+              value={formData.header}
+              onChange={(e) => setFormData({ ...formData, header: e.target.value })}
+              sx={{ mb: 3 }}
+            />
+
+            <TextField
+              className='event_input'
+              label="Category"
+              fullWidth
+              required
+              placeholder="e.g. Academics, Sports, Research, Campus Life"
+              value={formData.category}
+              onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+              sx={{ mb: 3 }}
+            />
+
+            <TextField
+              className='event_input'
+              label="Full Description"
+              multiline
+              rows={8}
+              fullWidth
+              required
+              value={formData.desc}
+              onChange={(e) => setFormData({ ...formData, desc: e.target.value })}
+              placeholder="Write a detailed and engaging news article..."
+            />
+          </div>
+
+          {/* Optional Image Upload */}
+          <div className="addProduct_Image createEvent_Image">
+            {!previewUrl ? (
+              <div
+                onClick={handlePickImage}
+                style={{
+                  border: '3px dashed #126865',
+                  borderRadius: '16px',
+                  padding: '3rem',
+                  textAlign: 'center',
+                  cursor: 'pointer',
+                  backgroundColor: '#f0fdfa',
+                  transition: 'all 0.3s',
+                  height: '100%'
+                }}
+              >
+                <PhotoCamera sx={{ fontSize: 80, color: '#126865' }} />
+                <p style={{ fontSize: '1.4rem', fontWeight: 'bold', marginTop: '1rem' }}>
+                  (Optional) Click to Add Image
+                </p>
+              </div>
+            ) : (
+              <div style={{ textAlign: 'center' }}>
+                <img
+                  src={previewUrl}
+                  alt="Preview"
+                  style={{
+                    maxHeight: '400px',
+                    width: '100%',
+                    objectFit: 'cover',
+                    borderRadius: '16px',
+                    boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+                  }}
+                />
+                {isUploading && (
+                  <div style={{ marginTop: '1rem' }}>
+                    <CircularProgress />
+                    <p>Uploading image... {progress}%</p>
+                  </div>
+                )}
+                <Button
+                  onClick={() => {
+                    setSelectedFile(null);
+                    setPreviewUrl(null);
+                  }}
+                  variant="outlined"
+                  color="error"
+                  sx={{ mt: 2, background: 'white' }}
+                >
+                  Remove Image
+                </Button>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Publish Button */}
+        <div style={{ textAlign: 'center', marginTop: '2.5rem' }}>
+          <Button
+            type="submit"
+            variant="contained"
+            size="large"
+            disabled={submitting || isUploading}
+            sx={{
+              minWidth: '280px',
+              py: 2,
+              fontSize: '1.3rem',
+              background: '#126865',
+              '&:hover': { background: '#0d9488' },
+            }}
+          >
+            {submitting || isUploading ? (
+              <CircularProgress size={32} color="inherit" />
+            ) : (
+              'PUBLISH NEWS'
+            )}
+          </Button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default CreateNews;
