@@ -1,0 +1,468 @@
+.dashboard-container {
+    width: 100%;
+}
+
+    /*------------------ dashboard navigation ----------------------*/
+.dashboard-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1% 0 30px;
+}
+
+.navigation-nav-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.dashboard-nav-icon {
+    background: #126865ff;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    color: white;
+}
+
+.dashboard-nav-info h2 {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.dashboard-nav-info p {
+    font-size: 14px;
+}
+
+.navigation-nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+
+    /*------------------ dashboard top ----------------------*/
+.dashboard-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dashboard-top-item {
+    flex-basis: 23.5%;
+    background: #126865ff;
+    border-radius: 5px;
+    padding: 15px 10px 20px 10px;
+    color: white;
+    box-shadow: var(--box-shadow);
+}
+
+.dashboard-top-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 10px;
+}
+
+.dashboard-top-header-names h2 {
+    font-weight: 500;
+    font-size: 40px;
+}
+
+.dashboard-top-icon {
+    background: white;
+    color: #126865ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: var(--box-shadow);
+}
+
+.dashboard-top-bottom p {
+    font-size: 14px;
+}
+
+.dashboard-top-bottom p span {
+    margin-right: 10px;
+}
+
+
+
+    /*------------------ dashboard sales ----------------------*/
+.dashboard-sales {
+    padding-top: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dashboard-sales-left {
+    flex-basis: 74.5%;
+    border-radius: 5px;
+    background: white;
+    box-shadow: var(--box-shadow);
+    padding: 5px;
+}
+
+.dashboard-sales-left h2 {
+    font-weight: 500;
+    text-transform: uppercase;
+    margin: 10px 0 10px;
+    text-align: center;
+    font-size: 22px;
+}
+
+.dashboard-sales-item-left h2 span {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.dashboard-sales-chart {
+    width: 100%;
+}
+
+.dashboard-sales-right {
+    flex-basis: 23.5%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.dashboard-sales-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    border-radius: 5px;
+    padding: 10px 8px;
+    box-shadow: var(--box-shadow);
+}
+
+.dashboard-sales-item-left {
+    font-size: 15px;
+}
+
+.dashboard-sales-item-left p:first-child {
+    font-size: 15px;
+    margin-bottom: 15px;
+}
+
+.dashboard-sales-item-left p:nth-child(3) {
+    font-size: 14px;
+}
+
+.dashboard-sales-item-left h2 {
+    margin-bottom: 10px;
+    font-size: 25px;
+    font-weight: bold;
+    color: #126865ff;
+}
+
+.dashboard-sales-icon {
+    background: #126865ff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+
+
+    /*------------------ dashboard progress ----------------------*/
+.dashboard-progress-container {
+    box-shadow: var(--box-shadow);
+    border-radius: 5px;
+    padding: 15px 10px;
+    margin-top: 5%;
+    background: white;
+}
+
+.dashboard-progress-container h1 {
+    display: none;
+    text-transform: uppercase;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+.dashboard-progress {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dashboard-progress-item {
+    flex-basis: 23%;
+}
+
+.dashboard-progress-item p {
+    text-transform: capitalize;
+    margin-bottom: 15px;
+}
+
+.dashboard-progress-item h2 {
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.dashboard-progress-item h2 span {
+    font-size: 18px;
+    color: var(--top-greenish);
+}
+
+.royalred-font h2 span {
+    color: var(--royalred-color);
+}
+
+
+
+    /*------------------ dashboard update ----------------------*/
+.dashboard-updates {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.dashboard-updates-item {
+    flex-basis: 32%;
+    box-shadow: var(--box-shadow);
+    border-radius: 5px;
+    background: white;
+    padding: 10px 8px;
+}
+
+.dashboard-updates-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 25px;
+}
+
+.dashboard-updates-top h2 {
+    font-weight: 500;
+    font-size: 19px;
+}
+
+.dashboard-updates-body {
+    height: fit-content;
+    position: relative;
+}
+
+.dashboard-updates-body::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 100%;
+    left: 20.5px;
+    background: royalblue;
+    top: 0;
+}
+
+.dashboard-updates-profile {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding-bottom: 20px;
+}
+
+.dashboard-updates-img {
+    width: 41px;
+    height: 41px;
+    z-index: 2;
+    border-radius: 50%;
+    padding: 2px;
+    border: 1px solid royalblue;
+    background: white;
+}
+
+.dashboard-updates-img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.dashboard-updates-desc p:nth-child(1) {
+    text-transform: capitalize;
+}
+
+.dashboard-updates-desc p:nth-child(2) {
+    font-size: 13px;
+    line-height: 13px;
+    font-weight: 500;
+    color: rgb(17, 0, 255);
+}
+
+.dashboard-updates-informations {
+    background: var(--royalblue-color);
+    color: white;
+}
+
+.dashboard-updates-infos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 20px;
+}
+
+.dashboard-updates-graph {
+    color: var(--main-color);
+}
+
+.dashboard-updates-info p:nth-child(1) {
+    font-size: 15px;
+}
+
+.dashboard-updates-info p:nth-child(2) {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+
+
+
+    /*------------------ dashboard products ----------------------*/
+.dashboard-products {
+    margin-top: 5%;
+    box-shadow: var(--box-shadow);
+    border-radius: 5px;
+    padding: 15px 10px;
+}
+
+.dashboard-products h2 {
+    margin-bottom: 25px;
+    font-weight: 500;
+}
+
+
+
+    /*------------------ dashboard footer ----------------------*/
+.dashboard-footer {
+    padding: 25px 0 0;
+}
+
+.dashboard-footer p {
+    font-weight: 500;
+}
+
+
+    /*------------------ not seen in large screen ----------------------*/
+.dashboard-nav-info p:nth-child(3) {
+    display: none;
+}
+
+
+
+    /*--------------------------- MEDIA QUERYING ---------------------------------*/
+@media screen and (max-width: 1028px) {
+    .dashboard-sales {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .dashboard-sales-right{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+
+    .dashboard-sales-item {
+        flex-basis: 32%;
+    }
+}
+
+
+
+
+@media screen and (max-width: 730px) {
+    .dashboard-sales-item {
+        margin-bottom: 15px;
+    }
+
+    .navigation-nav-right {
+        display: none;
+    }
+    
+    .dashboard-nav-info p:nth-child(2) {
+        display: none;
+    } 
+
+    .dashboard-nav-info p:nth-child(3) {
+        display: block;
+    } 
+
+        /*------------------ dashboard top ----------------------*/
+    .dashboard-top {
+        flex-wrap: wrap;
+    }
+
+    .dashboard-top-item {
+        flex-basis: 48%;
+        margin-bottom: 4%;
+    }
+
+    .dashboard-top-icon {
+        padding: 6px;
+    }
+
+    .dashboard-top-header-names p span {
+        display: none;
+    }
+
+        /*------------------ dashboard progress ----------------------*/
+    .dashboard-progress-container {
+        margin-bottom: 35px;
+    }
+    .dashboard-progress-container h1 {
+        display: block;
+    }
+
+    .dashboard-progress {
+        flex-wrap: wrap;
+    }
+
+    .dashboard-progress-item {
+        flex-basis: 47%;
+        margin-bottom: 4%;
+    }
+
+    .dashboard-progress-item p {
+        font-size: 15px;
+    }
+
+    .dashboard-progress-item h2 {
+        font-size: 22px;
+    }
+
+    .dashboard-progress-item h2 span {
+        font-size: 16px;
+    }
+
+    .dashboard-sales-right {
+        flex-direction: column;
+    }
+
+    .dashboard-updates {
+        flex-direction: column;
+        gap: 30px;
+        margin-bottom: 30px;
+    }
+
+    .dashboard-products h2 {
+        text-align: center;
+        text-transform: uppercase;
+    }
+}

@@ -17,7 +17,7 @@ const NewUser = () => {
       e.preventDefault();
       try {
         const result = await register({ username, password, phoneNumber, location, email, gender }).unwrap();
-        alert("User: ", result.data.username, "created" )
+        console.log("User: ", result.data.username, "created" )
       } catch(error) {
         console.error('Register failed', error);
       }
