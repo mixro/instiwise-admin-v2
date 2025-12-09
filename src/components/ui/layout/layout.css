@@ -24,7 +24,6 @@
     top: 0;
     position: sticky;
     overflow-y: scroll;
-    background: var(--primary-color);
     color: white;
 }
 
@@ -33,7 +32,7 @@
 }
 
 .layout-sidebar::-webkit-scrollbar-track {
-    background: var(--primary-color);
+    background: #084442;
 }
 
 .layout-sidebar::-webkit-scrollbar-thumb {

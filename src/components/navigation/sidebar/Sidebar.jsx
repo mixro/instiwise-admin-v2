@@ -27,7 +27,7 @@ const Sidebar = () => {
       <div className="sidebar-wrapper" style={{color: theme.text_sidebar}}>
         <div className="sidebar-top">
           <div className="sidebar-logo">
-            <img className='w-15' src='/src/assets/images/white-icon.png' alt='SVC' />
+            <img className='w-14' src='/src/assets/images/white-icon.png' alt='SVC' />
             <p>INSTiWISE</p>
           </div>
 
@@ -85,7 +85,7 @@ const Sidebar = () => {
             </Link>
           </div>
 
-          <div className="toggle-theme">
+          {/* <div className="toggle-theme">
             <p>Change theme</p>
             
             <Switch
@@ -101,7 +101,7 @@ const Sidebar = () => {
                     },
                 }}
             />
-          </div>
+          </div> */}
         </div>
 
         <div className="sidebar-logout">

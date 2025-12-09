@@ -179,22 +179,22 @@ const Dashboard = () => {
             <div className="dashboard-progress-item">
               <p>Published project</p>
               <h2>532 <span>+1.69%</span></h2>
-              <Slider value={20} sx={{ color: '#f33756' }} aria-label="Default" valueLabelDisplay="auto" />
+              <Slider value={20} sx={{ color: '#126865ff' }} aria-label="Default" valueLabelDisplay="auto" />
             </div>
             <div className="dashboard-progress-item royalred-font">
               <p>Complete Task</p>
               <h2>4, 569 <span>-0.5%</span></h2>
-              <Slider value={50} sx={{ color: '#0d5ff7' }} aria-label="Default" valueLabelDisplay="auto" />
+              <Slider value={50} sx={{ color: '#126865ff' }} aria-label="Default" valueLabelDisplay="auto" />
             </div>
             <div className="dashboard-progress-item">
               <p>Successfully Task</p>
               <h2>84% <span>+0.99%</span></h2>
-              <Slider value={80} sx={{ color: '#049e80' }} aria-label="Default" valueLabelDisplay="auto" />
+              <Slider value={80} sx={{ color: '#126865ff' }} aria-label="Default" valueLabelDisplay="auto" />
             </div>
             <div className="dashboard-progress-item">
               <p>Ongoing project</p>
               <h2>365 <span>+0.35%</span></h2>
-              <Slider value={40} sx={{ color: '#e6a40b' }} aria-label="Default" valueLabelDisplay="auto" />
+              <Slider value={40} sx={{ color: '#126865ff' }} aria-label="Default" valueLabelDisplay="auto" />
             </div>
           </div>
         </div>
@@ -203,7 +203,7 @@ const Dashboard = () => {
           <div className="dashboard-updates-item">
             <div className="dashboard-updates-top">
               <h2>Recent News</h2>
-              <TrendingUp />
+              <Feed sx={{color: "#126865ff"}} />
             </div>
             <div className="dashboard-updates-body">
               {news
@@ -225,7 +225,7 @@ const Dashboard = () => {
           <div className="dashboard-updates-item">
             <div className="dashboard-updates-top">
               <h2>Upcoming Events</h2>
-              <People />
+              <CalendarMonth sx={{color: "#126865ff"}} />
             </div>
             <div className="dashboard-updates-body">
               {events
@@ -247,7 +247,7 @@ const Dashboard = () => {
           <div className="dashboard-updates-item">
             <div className="dashboard-updates-top">
               <h2>New Users</h2>
-              <People />
+              <People sx={{color: "#126865ff"}} />
             </div>
             <div className="dashboard-updates-body">
               {users
@@ -256,7 +256,7 @@ const Dashboard = () => {
                 .map((user) => (
                 <div key={user._id} className="dashboard-updates-profile">
                   <div className="dashboard-updates-img">
-                    <img src="https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-Vector-PNG-Pic.png" alt="US" />
+                    <img src="https://www.kindpng.com/picc/m/235-2351000_login-icon-png-transparent-png.png" alt="US" />
                   </div>
                   <div className="dashboard-updates-desc">
                     <p>{user.username}</p>

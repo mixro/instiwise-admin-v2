@@ -121,7 +121,7 @@ const User = () => {
         <div className="userShow">
           <div className="userShowTop">
             <img
-              src={user.img || "https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-Vector-PNG-Pic.png"}
+              src={user.img || "https://www.kindpng.com/picc/m/235-2351000_login-icon-png-transparent-png.png"}
               alt=""
               className="userShowImg"
             />

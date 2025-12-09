@@ -27,16 +27,16 @@
   margin-bottom: 10px;
   font-size: 16px;
   font-weight: 600;
-  color: var(--font-blue);
+  color: #084442;
 }
   
 .newUserItem > input {
-  height: 20px;
-  padding: 20px 10px;
+  padding: 12px 15px;
   border: 1px solid gray;
-  border-radius: 5px;
+  border-radius: 3px;
   outline: none;
   background: white;
+  font-size: 18px;
 }
 
 .newUserGender > input {
@@ -51,23 +51,22 @@
 }
 
 .newUserSelect{
-    height: 40px;
-    border-radius: 5px;
+    padding: 12px 15px;
+    border-radius: 3px;
     background: white;
 }
 
 .newUserButton{
     width: 200px;
     border: none;
-    background-color: darkblue;
+    background-color: #084442;
     color: white;
-    padding: 7px 10px;
+    padding: 9px 10px;
     font-weight: 600;
     border-radius: 10px;
     margin-top: 30px;
     cursor: pointer;
 }
-
 
 .createUserButton {
   width: 100%;
@@ -83,8 +82,9 @@
   align-items: center;
   justify-content: center;
   font-weight: 600;
+  font-size: 19px;
   cursor: pointer;
-  background: var(--font-blue);
+  background: #084442;
 }
 
 

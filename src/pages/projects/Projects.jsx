@@ -120,7 +120,7 @@ const Projects = () => {
   return (
     <div className="news-comp">
         <div className="news-top">
-            <div className="news-search" style={{borderColor: theme.green_text}}>
+            <div className="news-search" style={{borderColor: theme.sidebar_bg}}>
                 <input 
                     type="text" 
                     placeholder='Search here..' 
@@ -128,16 +128,16 @@ const Projects = () => {
                     onChange={(e) => setSearchQuery(e.target.value)}
                     style={{color: theme.text }}
                 />
-                <div className="newsearch-icon" style={{background: theme.green_text, color: theme.text_sidebar}}>
+                <div className="newsearch-icon" style={{background: theme.sidebar_bg, color: theme.text_sidebar}}>
                     <Search />
                 </div>
             </div>
             <div className="newsTop-details">
-                <div className="news-detail" style={{borderColor: theme.green_text}}>
+                <div className="news-detail" style={{borderColor: theme.sidebar_bg}}>
                     <CalendarMonth />
                     <p>{formattedDate}</p>
                 </div>
-                <div className="news-detail" style={{borderColor: theme.green_text, background: theme.green_text, color: "#fff"}}>
+                <div className="news-detail" style={{borderColor: theme.sidebar_bg, background: theme.sidebar_bg, color: "#fff"}}>
                     <FileDownload />
                     <p>Export</p>
                 </div>
@@ -145,7 +145,7 @@ const Projects = () => {
         </div>
 
         <div className="news-metrics">
-            <div className="news-metrics-left" style={{background: theme.green_text}}>
+            <div className="news-metrics-left" style={{background: theme.sidebar_bg}}>
                 <div className="newsTop_header">
                     <p className='totalnews-header'>TOTAL PROJECTS</p>
                     <Work sx={{fontSize: 30}} />
@@ -164,7 +164,7 @@ const Projects = () => {
                 </div>
             </div>
 
-            <div className="news-metrics-right" style={{borderColor: theme.green_text}}>
+            <div className="news-metrics-right" style={{borderColor: theme.sidebar_bg}}>
                 {Object.entries(summaryData || {}).map(([period, metric]) => (
                     <div className="newsSummary-item" key={period}>
                         <h2>{period}</h2>
@@ -182,7 +182,7 @@ const Projects = () => {
                             </div>
                             <div className="newssTimely-data">
                                 <div className="amount_metrics timely_amount_metrics">
-                                    <Work sx={{fontSize: 26, color: theme.green_text}} /> 
+                                    <Work sx={{fontSize: 26, color: theme.sidebar_bg}} /> 
                                     <span>Growth: {Number(metric.projectsGrowth || 0).toLocaleString()}%</span>
                                 </div>
                             </div>

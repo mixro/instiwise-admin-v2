@@ -29,7 +29,7 @@ const NewUser = () => {
         <form className="newUserForm">
           <div className="newUserItem">
             <label>Username</label>
-            <input type="text" required placeholder="john" onChange={(e) => setUsername(e.target.value)} />
+            <input type="text" required placeholder="eg. John" onChange={(e) => setUsername(e.target.value)} />
           </div>  
           <div className="newUserItem">
             <label>Address</label>
@@ -37,7 +37,7 @@ const NewUser = () => {
           </div>
           <div className="newUserItem">
             <label>Email</label>
-            <input type="email" required placeholder="john@gmail.com" onChange={(e) => setEmail(e.target.value)} />
+            <input type="email" required placeholder="eg. john@gmail.com" onChange={(e) => setEmail(e.target.value)} />
           </div>
           <div className="newUserItem">
             <label>Phone</label>
