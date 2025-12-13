@@ -1,4 +1,4 @@
-import { CalendarMonth, Feed, Message, PeopleAlt, SpaceDashboard, Work } from '@mui/icons-material';
+import { CalendarMonth, Feed, Message, PeopleAlt, Send, SpaceDashboard, Work } from '@mui/icons-material';
 import './sidebar.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../../hooks/useAuth';
@@ -64,7 +64,7 @@ const Sidebar = () => {
             </Link>
             <Link to='/requests' className='link-main'>
               <div className="sidebar-link">
-                <Message sx={{fontSize: 28}} />
+                <Send sx={{fontSize: 28}} />
                 <p>Requests</p>
               </div>
             </Link>

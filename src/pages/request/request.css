@@ -1,0 +1,141 @@
+.request-body {
+    display: flex;
+    padding-top: 40px;
+    justify-content: space-between;
+    margin-bottom: 300px;
+}
+
+/*------------------ request left ----------------------*/
+.request-left {
+    flex-basis: 65%;
+    padding: 20px;
+    -webkit-box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow);
+    background: var(--secondary-background);
+    border-radius: 5px;
+    background: white;
+}
+
+.request-title {
+    color: blue;
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-size: 17px;
+}
+
+.pt-20 {
+    margin-top: 30px;
+}
+
+.request_item {
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+}
+
+.request_item p:first-child {
+    font-weight: 600;
+    min-width: 23%;
+}
+
+.request_item button {
+    padding: 4px 15px;
+    color: white;
+}
+
+/*------------------ request right ----------------------*/
+.request-right {
+    flex-basis: 32%;
+    display: flex;
+    flex-direction: column;
+}
+
+.requestRight-top {
+    padding: 20px 20px 30px;
+    -webkit-box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow);
+    background: var(--secondary-background);
+    border-radius: 5px;
+    background: white;
+    margin-bottom: 35px;
+}
+
+.request-right h2 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.requestUpdate {
+    display: flex;
+    flex-direction: column;
+}
+
+.requestUpdate label {
+    color: blue;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.requestUpdate select {
+    border: 1px solid gray;
+    border-radius: 3px;
+    padding: 10px;
+    font-size: 17px;
+}
+
+.requestUpdate_button {
+    width: 100%;
+    border-radius: 50px;
+    background: blue;
+    padding: 10px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 17px;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+.delete {
+    background: red;
+}
+
+.requestRight-bottom {
+    padding: 20px;
+    -webkit-box-shadow: var(--box-shadow);
+    box-shadow: var(--box-shadow);
+    background: var(--secondary-background);
+    border-radius: 5px;
+    background: white;
+    flex: 1;
+}
+
+.requestInfos p {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    color: rgb(3, 66, 201);
+}
+
+.requestInfos p span {
+    color: black;
+}
+
+
+
+@media screen and (max-width: 770px) {
+    .request-body {
+        flex-direction: column;
+        gap: 35px;
+    }
+
+    .request_item {
+        padding: 0;
+    }
+}

@@ -105,7 +105,7 @@ const Requests = () => {
             renderCell: (params) => {
                 return (
                     <div className="newsButtons">
-                        <Link to={"/news/" + params.row._id}>
+                        <Link to={"/requests/" + params.row._id}>
                             <button className='viewButton'>view</button>
                         </Link>
                     </div>

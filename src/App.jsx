@@ -17,7 +17,8 @@ import User from './pages/user/User';
 import NewUser from './pages/newUser/NewUser';
 import NewEvent from './pages/newEvent/NewEvent';
 import CreateNews from './pages/createNews/CreateNews';
-import Requests from './pages/messages/Requests';
+import Requests from './pages/requests/Requests';
+import Request from './pages/request/Request';
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
             <Route path="/create-user" element={<ProtectedRoute><NewUser /></ProtectedRoute>} />
 
             <Route path="/requests" element={<ProtectedRoute><Requests /></ProtectedRoute>} />
+            <Route path="/requests/:id" element={<ProtectedRoute><Request /></ProtectedRoute>} />
           </Routes>
         </Router>
       </div>

@@ -1,6 +1,6 @@
+// src/store/api/requestsApi.js
 import { createApi } from '@reduxjs/toolkit/query/react';
 import { baseQueryWithReauth } from './authApi';
-
 
 export const requestsApi = createApi({
   reducerPath: 'requestsApi',
@@ -12,7 +12,7 @@ export const requestsApi = createApi({
     getAllDemoRequests: builder.query({
       query: (params) => ({
         url: '/demo-requests',
-        params, // e.g. { page: 1, limit: 20, status: 'pending' }
+        params,
       }),
       transformResponse: (res) => res.data || [],
       providesTags: (result) =>
@@ -24,14 +24,34 @@ export const requestsApi = createApi({
           : [{ type: 'DemoRequests', id: 'LIST' }],
     }),
 
-    // ADMIN: Get single request by ID
+    // ADMIN: Get single request by ID — CACHE FIRST
     getDemoRequestById: builder.query({
-      query: (id) => `/demo-requests/${id}`,
-      transformResponse: (res) => res.data,
+      async queryFn(id, api, _extraOptions, baseQuery) {
+        // Step 1: Check cache from getAllDemoRequests
+        const listCache = api.getState().requestsApi.queries['getAllDemoRequests(undefined)'];
+        // Note: If you use params (e.g. filters), you may need to check multiple keys
+        // But for simple list, 'undefined' is safe
+
+        if (listCache?.data) {
+          const cachedRequest = listCache.data.find((req) => req._id === id);
+          if (cachedRequest) {
+            return { data: cachedRequest };
+          }
+        }
+
+        // Step 2: Not in cache → fetch from server
+        const result = await baseQuery(`/demo-requests/${id}`);
+
+        if (result.error) {
+          return { error: result.error };
+        }
+
+        return { data: result.data?.data || result.data };
+      },
       providesTags: (result, error, id) => [{ type: 'DemoRequest', id }],
     }),
 
-    // ADMIN: Update request (e.g. mark as replied, add notes)
+    // ADMIN: Update request
     updateDemoRequest: builder.mutation({
       query: ({ id, ...updates }) => ({
         url: `/demo-requests/${id}`,
@@ -58,7 +78,7 @@ export const requestsApi = createApi({
       ],
     }),
 
-    // ADMIN: Get timely analytics (e.g. requests per day/week)
+    // ADMIN: Analytics
     getDemoRequestAnalytics: builder.query({
       query: () => '/demo-requests/analytics/timely',
       transformResponse: (res) => res.data || [],
@@ -72,7 +92,6 @@ export const {
   useGetAllDemoRequestsQuery,
   useGetDemoRequestByIdQuery,
   useGetDemoRequestAnalyticsQuery,
-
   useUpdateDemoRequestMutation,
   useDeleteDemoRequestMutation,
 } = requestsApi;

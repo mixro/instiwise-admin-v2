@@ -1,4 +1,4 @@
-// src/pages/Login.jsx
+import './login.css'
 import React, { useEffect, useState } from 'react';
 import { useTheme } from '../../context/ThemeContext';
 import { Link, useNavigate } from 'react-router-dom';
@@ -64,7 +64,7 @@ export default function Login() {
               <div className="logo-icon">
                 <img src='/src/assets/images/white-icon.png' />
               </div>
-              <span className="logo-text">InstiWise</span>
+              <span className="logo-text">INSTiWISE</span>
             </div>
 
             <h1 className="title">Welcome Back!</h1>
@@ -170,7 +170,7 @@ export default function Login() {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: ${theme.background};
+          background: #ddddddff;
           color: ${theme.text};
           font-family: 'Inter', 'Segoe UI', sans-serif;
           padding: 1rem;
@@ -207,7 +207,7 @@ export default function Login() {
           flex: 1;
           background: ${theme.background};
         }
-
+        
         .logo {
           display: flex;
           align-items: center;
@@ -215,7 +215,7 @@ export default function Login() {
           margin-bottom: 2.5rem;
           font-size: 1.8rem;
           font-weight: 700;
-          }
+        }
           
         .logo-icon {
             width: 48px;
@@ -454,6 +454,35 @@ export default function Login() {
 
         .logos span:hover {
           opacity: 1;
+        }
+
+        @media (max-width: 770px) {
+          .login-container {
+            align-items: flex-start;
+            background: #c7c7c7;
+            padding: 30px 1rem;
+          }
+
+          .login-form-section {
+            padding: 30px 3%;
+            flex: 1;
+          }
+
+          .logo {
+            font-weight: 600;
+            font-size: 1.6rem;
+          }
+
+          .title {
+            font-size: 2.1rem;
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 20px;
+          }
+          
+          .subtitle {
+            text-align: center
+          }
         }
       `}</style>
     </>

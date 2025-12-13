@@ -15,7 +15,7 @@ const Project = () => {
   return (
     <div className="product">
       <div className="productTitleContainer">
-        <h1 className="productTitle">Psroject Details</h1>
+        <h1 className="productTitle">Project Details</h1>
         <Link to="/create-project">
           <button className="productAddButton">Create</button>
         </Link>
