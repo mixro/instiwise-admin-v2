@@ -7,12 +7,20 @@ import { Slider } from "@mui/material"
 import moment from "moment";
 import './dashboard.css'
 import { events, news, users } from '../../constant/dummyData';
+import { useGetDashboardQuery } from '../../services/dashboardApi';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setDashboard } from '../../store/slices/dashboardSlice';
 
 
 const Dashboard = () => {
-    const year = new Date().getFullYear();
-    const { theme, toggleTheme } = useTheme();
-    const { user } = useAuth();
+    const dispatch = useDispatch();
+    const year = new Date().getFullYear();    
+
+    const { data: dashboard = {}, isLoading } = useGetDashboardQuery();
+    
+    const totalsData = dashboard.totals || {}; 
+    const recentData = dashboard.recent || {};
 
     const dealsData = [
       { month: 'Jan', projects: 800 },
@@ -28,6 +36,10 @@ const Dashboard = () => {
       { month: 'Nov', projects: 500 },
       { month: 'Dec', deals: 400 },
     ];
+
+    useEffect(() => {
+      dispatch(setDashboard(totalsData));
+    }, [totalsData]);
 
   return (
     <div className="dashboard-container">
@@ -56,14 +68,14 @@ const Dashboard = () => {
               <div className="dashboard-top-header">
                 <div className="dashboard-top-header-names">
                   <p><span>Total</span> News</p>
-                  <h2>233</h2>
+                  <h2>{totalsData.news?.total || 0}</h2>
                 </div>
                 <div className="dashboard-top-icon">
                   <Feed />
                 </div>
               </div>
               <div className="dashboard-top-bottom">
-                <p><span>+11%</span>From previous Month</p>
+                <p><span>{totalsData.news?.growth > 0 && '+'}{totalsData.news?.growth}%</span>From previous Month</p>
               </div>
             </Link>
           </div>
@@ -72,14 +84,14 @@ const Dashboard = () => {
               <div className="dashboard-top-header">
                 <div className="dashboard-top-header-names">
                   <p><span>Total</span> Events</p>
-                  <h2>78</h2>
+                  <h2>{totalsData.events?.total || 0}</h2>
                 </div>
                 <div className="dashboard-top-icon">
                   <CalendarMonth />
                 </div>
               </div>
               <div className="dashboard-top-bottom"> 
-                <p><span>+12%</span>From previous Month</p>
+                <p><span>{totalsData.events?.growth > 0 && '+'}{totalsData.events?.growth}%</span>From previous Month</p>
               </div>
             </Link>
           </div>
@@ -88,14 +100,14 @@ const Dashboard = () => {
               <div className="dashboard-top-header">
                 <div className="dashboard-top-header-names">
                   <p><span>Total</span> Projects</p>
-                  <h2>45</h2>
+                  <h2>{totalsData.projects?.total || 0}</h2>
                 </div>
                 <div className="dashboard-top-icon">
                   <Work />
                 </div>
               </div>
               <div className="dashboard-top-bottom">
-                <p><span>+50%</span>From previous Month</p>
+                <p><span>{totalsData.projects?.growth > 0 && '+'}{totalsData.projects?.growth}%</span>From previous Month</p>
               </div>
             </Link>
           </div>
@@ -104,14 +116,14 @@ const Dashboard = () => {
               <div className="dashboard-top-header">
                 <div className="dashboard-top-header-names">
                   <p><span>Total</span> Users</p>
-                  <h2>234</h2>
+                  <h2>{totalsData.users?.total || 0}</h2>
                 </div>
                 <div className="dashboard-top-icon">
                   <People />
                 </div>
               </div>
               <div className="dashboard-top-bottom">
-                <p><span>+52%</span>From previous Month</p>
+                <p><span>{totalsData.users?.growth > 0 && '+'}{totalsData.users?.growth}%</span>From previous Month</p>
               </div>
             </Link>
           </div>
@@ -206,13 +218,13 @@ const Dashboard = () => {
               <Feed sx={{color: "#126865ff"}} />
             </div>
             <div className="dashboard-updates-body">
-              {news
+              {Array.isArray(recentData.news) && recentData.news
                 .slice(0, 5)
                 .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) 
                 .map((item) => (
                 <div key={item._id} className="dashboard-updates-profile">
                   <div className="dashboard-updates-img">
-                    <img src='https://groundwater.org/wp-content/uploads/2022/07/news-placeholder.png' alt="US" />
+                    <img src={item.img || 'https://groundwater.org/wp-content/uploads/2022/07/news-placeholder.png'} alt="US" />
                   </div>
                   <div className="dashboard-updates-desc">
                     <p>{item.header}</p>
@@ -228,7 +240,7 @@ const Dashboard = () => {
               <CalendarMonth sx={{color: "#126865ff"}} />
             </div>
             <div className="dashboard-updates-body">
-              {events
+              {Array.isArray(recentData.upcomingEvents) && recentData.upcomingEvents
                 .slice(0, 5)
                 .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) 
                 .map((item) => (
@@ -238,7 +250,7 @@ const Dashboard = () => {
                   </div>
                   <div className="dashboard-updates-desc">
                     <p>{item.header}</p>
-                    <p>Joined {moment(item.createdAt).fromNow()}</p>
+                    <p>Date: {item.date}</p>
                   </div>
                 </div>
               ))}
@@ -250,13 +262,13 @@ const Dashboard = () => {
               <People sx={{color: "#126865ff"}} />
             </div>
             <div className="dashboard-updates-body">
-              {users
+              {Array.isArray(recentData.newUsers) && recentData.newUsers
                 .slice(0, 5)
                 .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) 
                 .map((user, id) => (
                 <div key={id} className="dashboard-updates-profile">
                   <div className="dashboard-updates-img">
-                    <img src="https://www.kindpng.com/picc/m/235-2351000_login-icon-png-transparent-png.png" alt="US" />
+                    <img src={user.img || "https://www.kindpng.com/picc/m/235-2351000_login-icon-png-transparent-png.png"} alt="US" />
                   </div>
                   <div className="dashboard-updates-desc">
                     <p>{user.username}</p>

@@ -127,6 +127,7 @@
 @media screen and (max-width: 770px) {
     .nav-bottom-button {
         display: block;
+        z-index: 20300;
     }
 } 
 
