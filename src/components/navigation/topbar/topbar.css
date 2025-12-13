@@ -126,7 +126,7 @@
 
     /*------------------- sidebar small ---------------------*/
     .Small_Sidebar_container {
-        background: var(--primary-color);
+        background: #084442;
         color: var(--background);
         height: fit-content;
         min-height: 100vh;

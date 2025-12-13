@@ -22,16 +22,20 @@
 }
 
   /*----------------- table buttons -------------------*/
-.completed button, .read button, .completed-circle, .approved button {
+.completed button, .read button, .completed-circle, .approved-button, .completed {
     background:  var(--secondary-color); /* #01b401 */
 }
 
-.pending button, .unread button, .pending-circle {
+.pending button, .unread button, .pending-circle, .pending {
     background: rgb(189, 161, 1);
 }
 
-.failed button, .failed-circle, .rejected button {
+.failed button, .failed-circle, .rejected-circle, .rejected {
     background: rgb(233, 83, 83);
+}
+
+.scheduled-circle, .scheduled {
+    background: rgb(68, 106, 233);    
 }
 
 .newsButtons {

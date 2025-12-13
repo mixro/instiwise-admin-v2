@@ -6,7 +6,7 @@ import { useAuth } from '../../hooks/useAuth';
 const ProtectedRoute = ({ children }) => {
   const { isAdmin, isLoading } = useAuth();
   
-  if (isLoading) return <div>Loading...</div>;
+  // if (isLoading) return <div>Loading...</div>;
 
   if (!isAdmin) {
     return <Navigate to="/login" replace />;

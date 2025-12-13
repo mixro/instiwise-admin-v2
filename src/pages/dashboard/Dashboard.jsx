@@ -253,8 +253,8 @@ const Dashboard = () => {
               {users
                 .slice(0, 5)
                 .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) 
-                .map((user) => (
-                <div key={user._id} className="dashboard-updates-profile">
+                .map((user, id) => (
+                <div key={id} className="dashboard-updates-profile">
                   <div className="dashboard-updates-img">
                     <img src="https://www.kindpng.com/picc/m/235-2351000_login-icon-png-transparent-png.png" alt="US" />
                   </div>
