@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { CircularProgress, Alert, TextField, Button } from '@mui/material';
 import { PhotoCamera } from '@mui/icons-material';
-import './CreateNews.css';
+import './createNews.css';
 import { useCreateNewsMutation } from '../../services/newsApi';
 import { useImageUpload } from '../../hooks/useImageUpload';
 

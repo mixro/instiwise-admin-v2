@@ -3,55 +3,44 @@ import './topbar.css'
 import { Box, Drawer } from '@mui/material'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Sidebar from "../sidebar/Sidebar";
-import { CalendarMonth, DensityMedium, Feed, PeopleAlt, Work } from "@mui/icons-material";
-import { useAuth } from "../../../hooks/useAuth";
+import { CalendarMonth, DensityMedium, Feed, PeopleAlt, Send, Work } from "@mui/icons-material";
 import { useTheme } from "../../../context/ThemeContext";
+import { useSelector } from "react-redux";
 
 const Topbar = () => {
     const location = useLocation();
-    const navigate = useNavigate();
-    const { signOut } = useAuth();
     const { theme, toggleTheme } = useTheme();
     const [state, setState] = useState({ left: false });
 
-    const handleLogout = async (e) => {
-        e.preventDefault();
-        try {
-            await signOut();
-            navigate('/login');
-        } catch(error) {
-            console.log('Logout error:', error);
-        }
-    }
+    const totalsData = useSelector((state) => state.dashboard.dashboard);
 
+    const getPageTitle = () => {
+      const pathSegments = location.pathname.split('/').filter(segment => segment);
+      const baseRoute = pathSegments[0] || 'Dashboard'; 
+      return baseRoute.charAt(0).toUpperCase() + baseRoute.slice(1); 
+    };
 
-  const getPageTitle = () => {
-    const pathSegments = location.pathname.split('/').filter(segment => segment);
-    const baseRoute = pathSegments[0] || 'Dashboard'; 
-    return baseRoute.charAt(0).toUpperCase() + baseRoute.slice(1); 
-  };
+    const currentTitle = getPageTitle();
 
-  const currentTitle = getPageTitle();
+    const toggleDrawer = (anchor, open) => (event) => {
+      if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+          return;
+      }
+      setState({ ...state, [anchor]: open });
+    };
 
-  const toggleDrawer = (anchor, open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-        return;
-    }
-    setState({ ...state, [anchor]: open });
-  };
-
-  const list = (anchor) => (
-    <Box
-        sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 260}}
-        role="presentation"
-        onClick={toggleDrawer(anchor, false)}
-        onKeyDown={toggleDrawer(anchor, false)}
-    >
-      <div className="Small_Sidebar_container">
-        <Sidebar />
-      </div>
-    </Box>
-  );
+    const list = (anchor) => (
+      <Box
+          sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 260}}
+          role="presentation"
+          onClick={toggleDrawer(anchor, false)}
+          onKeyDown={toggleDrawer(anchor, false)}
+      >
+        <div className="Small_Sidebar_container">
+          <Sidebar />
+        </div>
+      </Box>
+    );
 
   return (
     <div className="topbar-container" style={{background: theme.background}}>
@@ -80,7 +69,7 @@ const Topbar = () => {
             <div className="topbar-icon">
               <Feed sx={{fontSize: {xs: 28, sm: 28, md: 30}}} />
               <div className="topbar-icon-number" style={{background: theme.sidebar_bg}}>
-                <p>12</p>
+                <p>{totalsData.news?.total || 0}</p>
               </div>
             </div>
           </Link>
@@ -88,7 +77,7 @@ const Topbar = () => {
             <div className="topbar-icon">
               <CalendarMonth sx={{fontSize: 30}} />
               <div className="topbar-icon-number" style={{background: theme.sidebar_bg}}>
-                <p>10</p>
+                <p>{totalsData.events?.total || 0}</p>
               </div>
             </div>
           </Link>
@@ -96,7 +85,7 @@ const Topbar = () => {
             <div className="topbar-icon">
               <Work sx={{fontSize: {xs: 28, sm: 28, md: 30}}} />
               <div className="topbar-icon-number" style={{background: theme.sidebar_bg}}>
-                <p>34</p>
+                <p>{totalsData.projects?.total || 0}</p>
               </div>
             </div>
           </Link>
@@ -104,7 +93,15 @@ const Topbar = () => {
             <div className="topbar-icon">
               <PeopleAlt sx={{fontSize: {xs: 28, sm: 28, md: 30}}} />
               <div className="topbar-icon-number" style={{background: theme.sidebar_bg}}>
-                <p>11</p>
+                <p>{totalsData.users?.total || 0}</p>
+              </div>
+            </div>
+          </Link>
+          <Link to='/requests' className='link-main'>
+            <div className="topbar-icon">
+              <Send sx={{fontSize: {xs: 28, sm: 28, md: 30}}} />
+              <div className="topbar-icon-number" style={{background: theme.sidebar_bg}}>
+                <p>{totalsData.demoRequests?.total || 0}</p>
               </div>
             </div>
           </Link>

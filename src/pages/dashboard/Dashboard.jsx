@@ -1,12 +1,9 @@
-import { useTheme } from '../../context/ThemeContext';
-import { useAuth } from '../../hooks/useAuth';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, Line, ComposedChart } from 'recharts';
 import { CalendarMonth, EnergySavingsLeaf, Feed, Home, HomeOutlined, Lightbulb, People, Verified, Work, TrendingUp } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { Slider } from "@mui/material"
 import moment from "moment";
 import './dashboard.css'
-import { events, news, users } from '../../constant/dummyData';
 import { useGetDashboardQuery } from '../../services/dashboardApi';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -140,7 +137,7 @@ const Dashboard = () => {
                   <YAxis />
                   <Tooltip />
                   <Legend />
-                  <Bar dataKey="projects" fill="#126865ff" />
+                  <Bar dataKey="projects" fill="#084442" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -221,8 +218,8 @@ const Dashboard = () => {
               {Array.isArray(recentData.news) && recentData.news
                 .slice(0, 5)
                 .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) 
-                .map((item) => (
-                <div key={item._id} className="dashboard-updates-profile">
+                .map((item, id) => (
+                <div key={id} className="dashboard-updates-profile">
                   <div className="dashboard-updates-img">
                     <img src={item.img || 'https://groundwater.org/wp-content/uploads/2022/07/news-placeholder.png'} alt="US" />
                   </div>
@@ -243,8 +240,8 @@ const Dashboard = () => {
               {Array.isArray(recentData.upcomingEvents) && recentData.upcomingEvents
                 .slice(0, 5)
                 .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)) 
-                .map((item) => (
-                <div key={item._id} className="dashboard-updates-profile">
+                .map((item, id) => (
+                <div key={id} className="dashboard-updates-profile">
                   <div className="dashboard-updates-img">
                     <img src="https://i.pinimg.com/originals/4c/98/5f/4c985ff32df376a36599eaa38a1f0597.jpg" alt="US" />
                   </div>

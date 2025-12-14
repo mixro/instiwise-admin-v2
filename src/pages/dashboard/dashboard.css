@@ -17,7 +17,7 @@
 }
 
 .dashboard-nav-icon {
-    background: #126865ff;
+    background: var(--primary-deep);
     width: 40px;
     height: 40px;
     display: flex;
@@ -53,7 +53,7 @@
 
 .dashboard-top-item {
     flex-basis: 23.5%;
-    background: #126865ff;
+    background: var(--primary-deep);
     border-radius: 5px;
     padding: 15px 10px 20px 10px;
     color: white;
@@ -74,7 +74,7 @@
 
 .dashboard-top-icon {
     background: white;
-    color: #126865ff;
+    color: var(--primary-deep);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -161,11 +161,11 @@
     margin-bottom: 10px;
     font-size: 25px;
     font-weight: bold;
-    color: #126865ff;
+    color: var(--primary-deep);
 }
 
 .dashboard-sales-icon {
-    background: #126865ff;
+    background: var(--primary-deep);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -221,7 +221,7 @@
 
 .dashboard-progress-item h2 span {
     font-size: 17px;
-    color: #126865ff;
+    color: var(--primary-deep);
 }
 
 .royalred-font h2 span {
@@ -268,7 +268,7 @@
     width: 2px;
     height: 100%;
     left: 22px;
-    background: #126865ff;
+    background: var(--primary-deep);
     top: 0;
 }
 
@@ -283,7 +283,7 @@
     z-index: 2;
     border-radius: 50%;
     padding: 2px;
-    border: 1px solid #126865ff;
+    border: 1px solid var(--primary-deep);
     background: white;
 }
 
