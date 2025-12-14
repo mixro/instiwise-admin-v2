@@ -109,7 +109,7 @@ const Topbar = () => {
 
         <Link to="/" className='link-main'>
           <div className="topbar-profile">
-              <img src='/src/assets/images/icon.png' alt='PR' />
+              <img src='/assets/images/icon.png' alt='PR' />
           </div>
         </Link>
       </div>

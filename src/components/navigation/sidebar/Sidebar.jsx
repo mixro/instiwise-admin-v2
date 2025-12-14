@@ -27,7 +27,7 @@ const Sidebar = () => {
       <div className="sidebar-wrapper" style={{color: theme.text_sidebar}}>
         <div className="sidebar-top">
           <div className="sidebar-logo">
-            <img className='w-14' src='/src/assets/images/white-icon.png' alt='SVC' />
+            <img className='w-14' src='/assets/images/white-icon.png' alt='SVC' />
             <p>INSTiWISE</p>
           </div>
 
